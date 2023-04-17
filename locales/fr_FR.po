@@ -1,0 +1,415 @@
+#inc/config.class.php:30
+msgid "GDPR Configuration"
+msgstr "Configuration RGPD"
+
+#inc/config.class.php:55
+msgid "GDPR Plugin"
+msgstr "Plugin RGPD"
+
+#inc/config.class.php:58
+msgid "Configuration"
+msgstr "Configuration"
+
+#inc/config.class.php:61
+msgid "Data configuration"
+msgstr "Configuration des données"
+
+#inc/config.class.php:64
+msgid "History"
+msgstr "Historique"
+
+#inc/config.class.php:80
+msgid "Clean"
+msgstr "Nettoyer"
+
+#inc/config.class.php:81
+msgid "Remove"
+msgstr "Supprimer"
+
+#inc/config.class.php:118
+msgid "Active automitic action"
+msgstr "Activer l'action automatique"
+
+#inc/config.class.php:122
+msgid "Mode"
+msgstr "Mode"
+
+#inc/config.class.php:126
+msgid "Warning, if the mode is on remove, there is a risk of data loss !"
+msgstr "Attention, si le mode est en suppression, il y a un risque de perte de données !"
+
+#inc/config.class.php:189
+msgid "Data"
+msgstr "Donnée"
+
+#inc/config.class.php:190
+msgid "Action"
+msgstr "Action"
+
+#inc/config.class.php:191
+msgid "Replace"
+msgstr "Remplacement"
+
+#inc/config.class.php:200
+msgid "Forgot"
+msgstr "Oublier"
+
+#inc/config.class.php:200
+msgid "Keep"
+msgstr "Garder"
+
+#inc/config.class.php:200
+msgid "Change"
+msgstr "Changer"
+
+#inc/history.class.php:37
+msgid "Date"
+msgstr "Date"
+
+#inc/history.class.php:38
+msgid "Sucess"
+msgstr "Succès"
+
+#inc/history.class.php:39
+msgid "Error"
+msgstr "Erreur"
+
+#inc/history.class.php:51
+msgid "You don't have the required rights"
+msgstr "Vous n'avez pas les droit requis"
+
+#inc/action.class.php:49
+msgid "Clean inactive Users"
+msgstr "Nettoyage des utilisateurs inactif"
+
+#inc/config.class.php:299
+msgid "Login"
+msgstr "Login"
+
+#inc/config.class.php:299
+msgid "Password last update"
+msgstr "Dernière mise à jour du mot de passe"
+
+#inc/config.class.php:299
+msgid "Phone"
+msgstr "Téléphone"
+
+#inc/config.class.php:299
+msgid "Phone 2"
+msgstr "Téléphone 2"
+
+#inc/config.class.php:299
+msgid "Mobile"
+msgstr "Téléphone mobile"
+
+#inc/config.class.php:299
+msgid "Lastname"
+msgstr "Nom"
+
+#inc/config.class.php:299
+msgid "Firstname"
+msgstr "Prénom"
+
+#inc/config.class.php:299
+msgid "Locations"
+msgstr "Lieu"
+
+#inc/config.class.php:299
+msgid "Language"
+msgstr "Langue"
+
+#inc/config.class.php:299
+msgid "Use mode"
+msgstr "Use mode"
+
+#inc/config.class.php:299
+msgid "List limit"
+msgstr "Limite de liste"
+
+#inc/config.class.php:299
+msgid "Comment"
+msgstr "Commentaires"
+
+#inc/config.class.php:299
+msgid "Auth"
+msgstr "Authentification"
+
+#inc/config.class.php:299
+msgid "Auth type"
+msgstr "type d'authentification"
+
+#inc/config.class.php:299
+msgid "Last login"
+msgstr "Dernière connexion"
+
+#inc/config.class.php:299
+msgid "Date modification"
+msgstr "Date de dernière modifications"
+
+#inc/config.class.php:299
+msgid "Date synchronisation"
+msgstr "Date de dernière synchronisation"
+
+#inc/config.class.php:299
+msgid "Profiles"
+msgstr "Profils"
+
+#inc/config.class.php:299
+msgid "user titles"
+msgstr "titre"
+
+#inc/config.class.php:299
+msgid "User categories"
+msgstr "Catégorie"
+
+#inc/config.class.php:299
+msgid "Date format"
+msgstr "Format de date"
+
+#inc/config.class.php:299
+msgid "Number format"
+msgstr "Format des nombres"
+
+#inc/config.class.php:299
+msgid "Name format"
+msgstr "Format du nom complet"
+
+#inc/config.class.php:299
+msgid "csv delimiter"
+msgstr "Délimiteur CSV"
+
+#inc/config.class.php:299
+msgid "ids is visible"
+msgstr "Afficher les ID"
+
+#inc/config.class.php:299
+msgid "Use flat dropdowntree"
+msgstr "Afficher le nom complet dans les listes déroulantes des intitulés"
+
+#inc/config.class.php:299
+msgid "Show jobs at login"
+msgstr "Montrer les nouveaux tickets sur la page d'accueil"
+
+#inc/config.class.php:299
+msgid "Priority 1"
+msgstr "Priorité 1"
+
+#inc/config.class.php:299
+msgid "Priority 2"
+msgstr "Priorité 2"
+
+#inc/config.class.php:299
+msgid "Priority 3"
+msgstr "Priorité 3"
+
+#inc/config.class.php:299
+msgid "Priority 4"
+msgstr "Priorité 4"
+
+#inc/config.class.php:299
+msgid "Priority 5"
+msgstr "Priorité 5"
+
+#inc/config.class.php:299
+msgid "Priority 6"
+msgstr "Priorité 6"
+
+#inc/config.class.php:299
+msgid "Followup private"
+msgstr "Suivis privés par défaut"
+
+#inc/config.class.php:299
+msgid "Task private"
+msgstr "Tâches privées par défaut"
+
+#inc/config.class.php:299
+msgid "Default request types"
+msgstr "Source par défaut des demandes"
+
+#inc/config.class.php:299
+msgid "password forget token date"
+msgstr "Date du token de mot de passe oublié"
+
+#inc/config.class.php:299
+msgid "User DN"
+msgstr "User DN"
+
+#inc/config.class.php:299
+msgid "Registration number"
+msgstr "Matricule"
+
+#inc/config.class.php:299
+msgid "Show count on tabs"
+msgstr "Afficher les compteurs"
+
+#inc/config.class.php:299
+msgid "Refresh views"
+msgstr "Rafraichissement automatique des données"
+
+#inc/config.class.php:299
+msgid "Set default tech"
+msgstr "Me pré-sélectionner comme technicien lors de la création de ticket"
+
+#inc/config.class.php:299
+msgid "Personal token date"
+msgstr "Date du token personnel"
+
+#inc/config.class.php:299
+msgid "API token date"
+msgstr "Date du token API"
+
+#inc/config.class.php:299
+msgid "Cookie token Date"
+msgstr "Date du token du cookie"
+
+#inc/config.class.php:299
+msgid "Display count on Home"
+msgstr "Résultats à afficher sur la page d'accueil"
+
+#inc/config.class.php:299
+msgid "Notification to myself"
+msgstr "Notifications pour mes changements"
+
+#inc/config.class.php:299
+msgid "Due date OK color"
+msgstr "Couleur de l'état OK"
+
+#inc/config.class.php:299
+msgid "Due date Warning color"
+msgstr "Couleur de l'état avertissement"
+
+#inc/config.class.php:299
+msgid "Due date Critical color"
+msgstr "Couleur de l'état critique"
+
+#inc/config.class.php:299
+msgid "Due date warning less"
+msgstr "Seuil de l'état avertissement (valeur)"
+
+#inc/config.class.php:299
+msgid "Due date critical less"
+msgstr "Seuil de l'état critique (valeur)"
+
+#inc/config.class.php:299
+msgid "Due date warning Unit"
+msgstr "Seuil de l'état avertissement (unité)"
+
+#inc/config.class.php:299
+msgid "Due date critical Unit"
+msgstr "Seuil de l'état critique (unité)"
+
+#inc/config.class.php:299
+msgid "Display options"
+msgstr "Affichages des options"
+
+#inc/config.class.php:299
+msgid "Is deleted LDAP"
+msgstr "Est supprimé du LDAP"
+
+#inc/config.class.php:299
+msgid "PDF font"
+msgstr "Police pour l'export PDF"
+
+#inc/config.class.php:299
+msgid "Picture"
+msgstr "Image"
+
+#inc/config.class.php:299
+msgid "Begin date"
+msgstr "Date de début"
+
+#inc/config.class.php:299
+msgid "End Date"
+msgstr "Date de fin"
+
+#inc/config.class.php:299
+msgid "Keep devices when purging item"
+msgstr "Garder les composants lors de la suppression définitive d'un élément"
+
+#inc/config.class.php:299
+msgid "Private bookmark order"
+msgstr "ordre des marques page privés"
+
+#inc/config.class.php:299
+msgid "back created"
+msgstr "Après la création, aller à l'élément créé"
+
+#inc/config.class.php:299
+msgid "task state"
+msgstr "État des tâches par défaut"
+
+#inc/config.class.php:299
+msgid "layout"
+msgstr "Disposition"
+
+#inc/config.class.php:299
+msgid "palette"
+msgstr "Palette de couleur"
+
+#inc/config.class.php:299
+msgid "set default requester"
+msgstr "Me pré-selectionner en tant que demandeur à la création d'un ticket"
+
+#inc/config.class.php:299
+msgid "lock autolock mode"
+msgstr "Nom"
+
+#inc/config.class.php:299
+msgid "lock direct unlock notification"
+msgstr "glpilock_autolock_notification"
+
+#inc/config.class.php:299
+msgid "date creation"
+msgstr "Date de création"
+
+#inc/config.class.php:299
+msgid "high contrast CSS"
+msgstr "Activer le contraste élevé"
+
+#inc/config.class.php:299
+msgid "plannings"
+msgstr "Planning"
+
+#inc/config.class.php:299
+msgid "synchronisation field"
+msgstr "Synchronisation des champs"
+
+#inc/config.class.php:299
+msgid "supervivor"
+msgstr "Superviseur"
+
+#inc/config.class.php:299
+msgid "Timezone"
+msgstr "Fuseau horaire"
+
+#inc/config.class.php:299
+msgid "Default dashboard central"
+msgstr "Défaut pour la page centrale"
+
+#inc/config.class.php:299
+msgid "Default dashboard assets"
+msgstr "Défaut pour le parc"
+
+#inc/config.class.php:299
+msgid "Default dashboard helpdesk"
+msgstr "Défaut pour l'assistance"
+
+#inc/config.class.php:299
+msgid "Default dashboard mini ticket"
+msgstr "Défaut pour les tickets"
+
+#inc/config.class.php:299
+msgid "access zoom level"
+msgstr "Echelle de l'interface utilisateur"
+
+#inc/config.class.php:299
+msgid "Access font"
+msgstr "Police de l'interface utilisateur"
+
+#inc/config.class.php:299
+msgid "Access shortcuts"
+msgstr "Activer les raccourcis"
+
+#inc/config.class.php:299
+msgid "Accesss custom shortcut"
+msgstr "Activer les raccourcis personnalisé"
