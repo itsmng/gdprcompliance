@@ -1,14 +1,33 @@
 <?php
 /**
- * @package     gdprcompliance
- * @author      Rudy Laurent
- * @copyright   Copyright (c) 2015-2016 FactorFX
- * @license     AGPL License 3.0 or (at your option) any later version
- *              http://www.gnu.org/licenses/agpl-3.0-standalone.html
- * @link        https://www.factorfx.com
- * @since       2015
+ * ---------------------------------------------------------------------
+ * ITSM-NG
+ * Copyright (C) 2022 ITSM-NG and contributors.
  *
- * --------------------------------------------------------------------------
+ * https://www.itsm-ng.org
+ *
+ * based on GLPI - Gestionnaire Libre de Parc Informatique
+ * Copyright (C) 2003-2014 by the INDEPNET Development Team.
+ *
+ * ---------------------------------------------------------------------
+ *
+ * LICENSE
+ *
+ * This file is part of ITSM-NG.
+ *
+ * ITSM-NG is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * ITSM-NG is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ITSM-NG. If not, see <http://www.gnu.org/licenses/>.
+ * ---------------------------------------------------------------------
  */
 
 if (!defined('GLPI_ROOT')) {
@@ -21,20 +40,17 @@ class PluginGdprcomplianceProfile extends Profile
 	static $rightname = "profile";
 
 	static $all_profile_rights = array(
-			'plugin_gdprcompliance_config',
+		'plugin_gdprcompliance_config',
 	);
 
-	public function getTabNameForItem(CommonGLPI $item, $withtemplate = 0)
-	{
-
+	public function getTabNameForItem(CommonGLPI $item, $withtemplate = 0) {
 		if ($item->getType() == 'Profile') {
 			return PluginGdprcomplianceConfig::getTypeName(0);
 		}
 		return '';
 	}
 
-	static function displayTabContentForItem(CommonGLPI $item, $tabnum = 1, $withtemplate = 0)
-	{
+	static function displayTabContentForItem(CommonGLPI $item, $tabnum = 1, $withtemplate = 0) {
 		$_profile = new self();
 		if ($item->getType() == 'Profile') {
 			$id = $item->getID();
@@ -45,21 +61,18 @@ class PluginGdprcomplianceProfile extends Profile
 		return true;
 	}
 
-	static function install(Migration $migration)
-	{
+	static function install(Migration $migration) {
 		// Create my right access
 		self::addRight(false, 5);
 	}
 
-	static function uninstall()
-	{
+	static function uninstall() {
 		// Remove all profiles
 		self::removeAllRight();
 		return true;
 	}
 
-	static function removeAllRight()
-	{
+	static function removeAllRight() {
 		$_profile = new ProfileRight();
 		foreach ($_profile->find("`name` LIKE 'plugin_gdprcompliance_%'") as $data) {
 			$_profile->delete($data);
@@ -72,11 +85,10 @@ class PluginGdprcomplianceProfile extends Profile
 	 * @param $profiles_id
 	 * @param $right_value
 	 */
-	static function addRight($profiles_id, $right_value)
-	{
+	static function addRight($profiles_id, $right_value) {
 		$_profile = new ProfileRight();
 		foreach (self::$all_profile_rights as $profile_name) {
-			if (!$_profile->find("`profiles_id` = $profiles_id and `name` = '$profile_name'")) {
+			if (!$_profile->find(["profiles_id" => $profiles_id, "name" => $profile_name])) {
 				$right['profiles_id'] = $profiles_id ?: $_SESSION['glpiactiveprofile']['id'];
 				$right['name'] = $profile_name;
 				$right['rights'] = $right_value;
@@ -94,8 +106,7 @@ class PluginGdprcomplianceProfile extends Profile
 	 * @param bool|true $closeform
 	 * @return bool
 	 */
-	public function showForm($profiles_id = 0, $openform = true, $closeform = true)
-	{
+	public function showForm($profiles_id = 0, $openform = true, $closeform = true) {
 		$profile = new Profile();
 		$canedit = Session::haveRightsOr(self::$rightname, array(READ, UPDATE));
 
@@ -108,9 +119,10 @@ class PluginGdprcomplianceProfile extends Profile
 
 		$config_right = $this->getAllRights();
 		$profile->displayRightsChoiceMatrix($config_right, array(
-				'canedit' => $canedit,
-				'default_class' => 'tab_bg_2',
-				'title' => __s('General')));
+			'canedit' => $canedit,
+			'default_class' => 'tab_bg_2',
+			'title' => __s('General'))
+		);
 
 		if ($canedit && $closeform) {
 			echo "<div class='center'>";
@@ -119,6 +131,7 @@ class PluginGdprcomplianceProfile extends Profile
 			echo "</div>";
 			Html::closeForm();
 		}
+
 		echo "</div>";
 
 		$this->showLegend();
@@ -126,22 +139,21 @@ class PluginGdprcomplianceProfile extends Profile
 		return true;
 	}
 
-	static function getAllRights()
-	{
+	static function getAllRights() {
 
 		$rights = array(
-				array(
-					'itemtype' => 'PluginGdprcomplianceConfig',
-					'label' => __s('Setup'),
-					'field' => 'plugin_gdprcompliance_config',
-					'rights' => [READ =>__('Read'), UPDATE => __('Update')]
-				),
-				array(
-					'itemtype' => 'PluginGdprcomplianceHistory',
-					'label' => __s('Historique'),
-					'field' => 'plugin_gdprcompliance_history',
-					'rights' => [READ=>__('Read')]
-				),
+			array(
+				'itemtype' => 'PluginGdprcomplianceConfig',
+				'label' => __('Setup'),
+				'field' => 'plugin_gdprcompliance_config',
+				'rights' => [READ =>__('Read'), UPDATE => __('Update')]
+			),
+			array(
+				'itemtype' => 'PluginGdprcomplianceHistory',
+				'label' => __('History', 'gdprcompliance'),
+				'field' => 'plugin_gdprcompliance_history',
+				'rights' => [READ=>__('Read')]
+			),
 		);
 
 		return $rights;
