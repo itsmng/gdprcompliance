@@ -191,16 +191,16 @@ class PluginGdprcomplianceConfig extends CommonDBTM {
    function showConfigData($ID, $options = []){
       global $DB;
 
-      $query = "SELECT `COLUMN_NAME`, `DATA_TYPE` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`=Database() AND `TABLE_NAME`='glpi_users'";
+      $query = "SHOW COLUMNS FROM glpi_users";
       $result_glpi = $DB->query($query);
       
       $userColumns = [];
       
       if ($DB->numrows($result_glpi) > 0) {
          while ($data = $DB->fetchArray($result_glpi)) {
-            if (in_array($data['COLUMN_NAME'], $this->allowFields)) {
-               $userColumns[$data['COLUMN_NAME']]['COLUMN_NAME'] = $data['COLUMN_NAME'];
-               $userColumns[$data['COLUMN_NAME']]['COLUMN_TYPE'] = $data['DATA_TYPE'];
+            if (in_array($data['Field'], $this->allowFields)) {
+               $userColumns[$data['Field']]['COLUMN_NAME'] = $data['Field'];
+               $userColumns[$data['Field']]['COLUMN_TYPE'] = preg_replace("/\([^()]*\)/", "", $data['Type']);
             }
          }
          $userColumns['email']['COLUMN_NAME'] = 'email';
