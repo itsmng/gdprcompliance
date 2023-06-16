@@ -40,12 +40,8 @@ function plugin_init_gdprcompliance() {
 
     $PLUGIN_HOOKS['change_profile']['gdprcompliance'] = array(PluginGdprcomplianceProfile::class,'initProfile');
 
-    Plugin::registerClass('PluginGdprcompliance', array('addtabon' => array('Tools')));
     Plugin::registerClass(PluginGdprcomplianceConfig::class, ['addtabon' => 'Config']);
-    Plugin::registerClass(PluginGdprcomplianceAction::class, ['addtabon' => 'Entity']);
     Plugin::registerClass(PluginGdprcomplianceProfile::class, array('addtabon' => 'Profile'));
-
-    $PLUGIN_HOOKS['change_profile']['gdprcompliance'] = ['PluginGdprcomplianceProfile', 'initProfile'];
 
     $PLUGIN_HOOKS['menu_toadd']['gdprcompliance'] = ['tools' => 'PluginGdprcomplianceConfig'];
 
@@ -73,8 +69,8 @@ function plugin_version_gdprcompliance() {
  * @return void
  */
 function plugin_gdprcompliance_check_prerequisites() {
-    if (version_compare(GLPI_VERSION,'9.5','lt') || version_compare(GLPI_VERSION,'9.6','ge')) {
-        echo "This plugin requires GLPI >= 9.5";
+    if (version_compare(ITSM_VERSION,'1.4','lt') || version_compare(ITSM_VERSION,'1.6','ge')) {
+        echo "This plugin requires ITSM >= 1.4";
         return false;
     }
     return true;
