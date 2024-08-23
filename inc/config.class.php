@@ -85,7 +85,7 @@ class PluginGdprcomplianceConfig extends CommonDBTM {
    static function getTypeName($nb = 0) {
       return __("GDPR Configuration", 'gdprcompliance');
    }
-      
+
    /**
     * getMenuContent
     *
@@ -101,7 +101,7 @@ class PluginGdprcomplianceConfig extends CommonDBTM {
 
        return $menu;
    }
-   
+
    /**
     * showMenu
     *
@@ -109,28 +109,19 @@ class PluginGdprcomplianceConfig extends CommonDBTM {
     */
    function showMenu(){
       echo "<div class='center'>";
-      if (Session::haveRight("plugin_gdprcompliance_config", READ) || 
+      if (Session::haveRight("plugin_gdprcompliance_config", READ) ||
           Session::haveRight("plugin_gdprcompliance_config", UPDATE) ||
           Session::haveRight("plugin_gdprcompliance_history", READ)) {
 
-         echo "<table class='tab_cadre'>";
-         echo "<tr>";
-         echo "<th>" . __("GDPR Compliance", 'gdprcompliance') . "</th>";
-         echo "</tr>";
+         echo "<h2>" . __("GDPR Compliance", 'gdprcompliance') . "</h2>";
+         $buttonClass="btn btn-outline-secondary d-block w-50 mx-auto mb-2";
          if (Session::haveRight("plugin_gdprcompliance_config", READ) || Session::haveRight("plugin_gdprcompliance_config", UPDATE)) {
-            echo "<tr>";
-            echo "<td><a href='./config.form.php?config=1'>" . __("Setup") . "</td>";
-            echo "</tr>";
-            echo "<tr>";
-            echo "<td><a href='./config.form.php?configdata=1'>" . __("User data configuration", 'gdprcompliance') . "</td>";
-            echo "</tr>";
+            echo "<a href='./config.form.php?config=1' class='".$buttonClass."'>" . __("Setup") . "</a>";
+            echo "<a href='./config.form.php?configdata=1' class='".$buttonClass."'>" . __("User data configuration", 'gdprcompliance') . "</a>";
          }
          if (Session::haveRight("plugin_gdprcompliance_history", READ)) {
-            echo "<tr>";
-            echo "<td><a href='./history.form.php'>" . __("History", 'gdprcompliance') . "</td>";
-            echo "</tr>";
+            echo "<a href='./history.form.php' class='".$buttonClass."'>" . __("History", 'gdprcompliance') . "</a>";
          }
-         echo "</table>";
 
       } else {
          echo __("You don't have the required rights", 'gdprcompliance');
@@ -162,25 +153,44 @@ class PluginGdprcomplianceConfig extends CommonDBTM {
          }
       }
 
-      $this->initForm($ID, $options);
-      $this->showFormHeader($options);
-
-      echo "<tr class='tab_bg_1'>";
-      echo "<td> " . __('Active automatic action', 'gdprcompliance') . " </td><td>";
-      Dropdown::showYesNo("active", $saved['active']);
-
-      echo "<tr class='tab_bg_1'>";
-      echo "<td> " . __('Mode', 'gdprcompliance') . " </td><td>";
-      Dropdown::showFromArray('mode', $mode, ['value' => $saved['mode']]);
-      echo "</td>";
-      echo "</tr>";
-      echo "<tr><td><span>" . __("Warning, if the mode is on remove, there is a risk of data loss !", 'gdprcompliance') . "</span></td></tr>";
-
-      $this->showFormButtons($options);
+      $form = [
+         'action' => $this->getFormURL(),
+         'buttons' => [
+            [
+                'value' => __('Save'),
+                'class'  => 'btn btn-secondary',
+                'name'  => 'update',
+            ],
+         ],
+         'content' => [
+            $this->getTypeName() => [
+                'visible' => true,
+                'inputs'  => [
+                    __('Active automatic action', 'gdprcompliance') => [
+                        'type'  => 'checkbox',
+                        'name'  => 'active',
+                        'value' => $saved['active'],
+                    ],
+                    __('Mode', 'gdprcompliance') => [
+                        'type'  => 'select',
+                        'name'  => 'mode',
+                        'value' => $saved['mode'],
+                        'values' => $mode,
+                    ],
+                    '' => [
+                        'content' => "<span>" . __("Warning, if the mode is on remove, there is a risk of data loss !", 'gdprcompliance') . "</span>",
+                        'col_lg' => 12,
+                        'col_md' => 12,
+                    ]
+                ]
+            ]
+         ]
+      ];
+      renderTwigForm($form);
 
       return true;
    }
-   
+
    /**
     * showConfigData
     *
@@ -193,9 +203,9 @@ class PluginGdprcomplianceConfig extends CommonDBTM {
 
       $query = "SELECT `COLUMN_NAME`, `DATA_TYPE` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`=Database() AND `TABLE_NAME`='glpi_users'";
       $result_glpi = $DB->query($query);
-      
+
       $userColumns = [];
-      
+
       if ($DB->numrows($result_glpi) > 0) {
          while ($data = $DB->fetchArray($result_glpi)) {
             if (in_array($data['COLUMN_NAME'], $this->allowFields)) {
@@ -238,43 +248,57 @@ class PluginGdprcomplianceConfig extends CommonDBTM {
 		$state = $this->getState();
       $this->showFormHeader(['formtitle' => false]);
 
-      echo "<tr>";
-      echo "<th>" . __("User data", 'gdprcompliance') . "</th>";
-      echo "<th>" . __("Action", 'gdprcompliance') . "</th>";
-      echo "<th>" . __("Replace", 'gdprcompliance') . "</th>";
-      echo "</tr>";
+      $fields = [
+        'user_data' => __("User data", 'gdprcompliance'),
+        'action' => __("Action", 'gdprcompliance'),
+        'replace' => __("Replace", 'gdprcompliance'),
+      ];
+      $values = [];
 
       foreach ($userColumns as $key => $value) {
          $presetValue = "";
+         $newValue = [];
          if(isset($saved[$value['COLUMN_NAME']])) $presetValue = $saved[$value['COLUMN_NAME']]['change'];
-
-         echo "<tr class='tab_bg_1'>";
-         echo "<td>";
-         echo self::translateField($value['COLUMN_NAME']);
-         echo "</td>";
-         echo "<td>";
-
+            $newValue['user_data'] = self::translateField($value['COLUMN_NAME']);
          if(in_array($value['COLUMN_TYPE'], $this->textField)) {
-            Dropdown::showFromArray($key, [__('Forget', 'gdprcompliance'), __('Keep', 'gdprcompliance'), __('Change', 'gdprcompliance')], ['value' => array_key_exists($value['COLUMN_NAME'], $saved) ? $saved[$value['COLUMN_NAME']]['value'] : 0]);
-            echo "</td>";
-            echo "<td>";
-            echo "<input id='change".$value['COLUMN_NAME']."' class='".$value["COLUMN_NAME"]."' name='change_".$value['COLUMN_NAME']."' value='".$presetValue."'>";
-            echo "</td>";
-            echo "</tr>";
+            $newValue['action'] = Dropdown::showFromArray($key,
+                [
+                    __('Forget', 'gdprcompliance'),
+                    __('Keep', 'gdprcompliance'),
+                    __('Change', 'gdprcompliance')
+                ], [
+                    'value' => array_key_exists($value['COLUMN_NAME'], $saved)
+                        ? $saved[$value['COLUMN_NAME']]['value'] : 0,
+                    'display' => false
+            ]);
+            $newValue['replace'] = "<input id='change".$value['COLUMN_NAME'].
+                "' class='form-control ".$value["COLUMN_NAME"].
+                "' name='change_".$value['COLUMN_NAME'].
+                "' value='".$presetValue."'>";
          } else {
-            Dropdown::showFromArray($value['COLUMN_NAME'], [__('Forget', 'gdprcompliance'), __('Keep', 'gdprcompliance')], ['value' => array_key_exists($value['COLUMN_NAME'], $saved) ? $saved[$value['COLUMN_NAME']]['value'] : 0]);
-            echo "</td>";
-            echo "<td></td>";
-            echo "</tr>";
+            $newValue['action'] = Dropdown::showFromArray($value['COLUMN_NAME'],
+                [
+                    __('Forget', 'gdprcompliance'),
+                    __('Keep', 'gdprcompliance')
+                ], [
+                    'value' => array_key_exists($value['COLUMN_NAME'], $saved)
+                        ? $saved[$value['COLUMN_NAME']]['value'] : 0,
+                    'display' => false
+                ]);
          }
-         
+         $values[] = $newValue;
       }
+      renderTwigTemplate('table.twig', [
+         'minimal' => true,
+         'fields' => $fields,
+         'values' => $values
+      ]);
 
       $this->showFormButtons($options);
 
       return true;
    }
-   
+
    /**
     * updateConfig
     *
@@ -310,7 +334,7 @@ class PluginGdprcomplianceConfig extends CommonDBTM {
 
       $DB->query($query);
    }
-   
+
    /**
     * getState
     *
@@ -320,14 +344,14 @@ class PluginGdprcomplianceConfig extends CommonDBTM {
       $allState = [];
       $state = new State();
       $states = $state->find();
-      
+
       foreach($states as $list) {
          $allState[$list['id']] = $list['name'];
       }
 
       return $allState;
    }
-   
+
    /**
     * getSearchOptions
     *
@@ -335,20 +359,20 @@ class PluginGdprcomplianceConfig extends CommonDBTM {
     */
    public function getSearchOptions() {
       $tab = array();
-      
+
       return $tab;
    }
-   
+
    /**
     * install
     *
     * @param  mixed $mig
     * @return void
     */
-   public function install(Migration $mig) { 	
+   public function install(Migration $mig) {
       return true;
    }
-   
+
    /**
     * uninstall
     *
@@ -357,7 +381,7 @@ class PluginGdprcomplianceConfig extends CommonDBTM {
    public function uninstall() {
       return true;
    }
-   
+
    /**
     * translateField
     *
