@@ -60,7 +60,7 @@ function plugin_init_gdprcompliance() {
 function plugin_version_gdprcompliance() {
     return [
         'name'           => __('GDPR Compliance', 'gdprcompliance'),
-        'version'        => '1.0',
+        'version'        => '2.0.0',
         'author'         => 'Rudy Laurent, Charlène Auger',
         'license'        => 'AGPLv3+',
         'minGlpiVersion' => '9.5'
